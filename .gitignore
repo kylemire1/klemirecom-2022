@@ -5,4 +5,5 @@ node_modules
 /.netlify
 .env
 /app/tailwind.css
+/syles/tailwind.css
 remix.config.js
