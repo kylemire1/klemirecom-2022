@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.button-primary {
+  @apply text-white border border-solid border-primary bg-primary rounded-md p-3 inline-flex items-center justify-between gap-2
+}
+.button-highlight {
+  @apply text-highlight bg-white border border-solid border-highlight rounded-md p-3 inline-flex items-center justify-between gap-2
+}
