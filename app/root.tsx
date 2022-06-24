@@ -34,9 +34,6 @@ export const meta: MetaFunction = () => ({
 })
 
 export default function App() {
-  const matches = useMatches()
-  const isContact = matches.some((m) => /contact/i.test(m.pathname))
-  console.log(isContact)
   return (
     <html
       lang='en'
@@ -46,11 +43,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body
-        className={`h-full overflow-x-hidden ${
-          isContact && 'overflow-y-hidden'
-        } font-poppins text-lg`}
-      >
+      <body className={`h-full overflow-x-hidden font-poppins text-lg`}>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
