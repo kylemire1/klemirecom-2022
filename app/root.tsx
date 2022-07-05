@@ -26,7 +26,7 @@ export const links: LinksFunction = () => {
     {
       rel: 'preload',
       as: 'image',
-      href: meSrc,
+      href: '/images/me.jpeg',
     },
   ]
 }
