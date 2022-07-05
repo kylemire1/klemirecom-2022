@@ -4,8 +4,8 @@ import { Form, useActionData } from '@remix-run/react'
 import { Layout } from '~/components'
 import LinkedIn from '~/components/svg/linkedin'
 import Twitter from '~/components/svg/twitter'
-import { validateTextInput, validateEmail, badRequest, encode } from '~/utils/form'
-import sgMail from '@sendgrid/mail'
+import { validateTextInput, validateEmail, badRequest } from '~/utils/form'
+import { sgMail } from '~/utils/mail'
 
 const FORM_NAME = 'contact'
 
@@ -21,12 +21,16 @@ export type ActionData = {
     email: string
     message: string | undefined
   }
+  success?: {
+    message: string
+  }
 }
 export const action: ActionFunction = async ({ request }) => {
   const body = await request.formData()
   const name = body.get('name')
   const email = body.get('email')
   const message = body.get('message')
+  const API_KEY = process.env.SENDGRID_API_KEY
 
   if (
     typeof name !== 'string' ||
@@ -34,6 +38,10 @@ export const action: ActionFunction = async ({ request }) => {
     typeof message !== 'string'
   ) {
     return json({ formError: `Form not submitted correctly` }, { status: 400 })
+  }
+
+  if (!API_KEY) {
+    return json({ formError: `Missing API Key` }, { status: 400 })
   }
 
   const fieldErrors = {
@@ -57,7 +65,7 @@ export const action: ActionFunction = async ({ request }) => {
     sgMail
       .send(msg)
       .then(() => {
-        console.log('Email sent')
+        return json({ success: 'Message Sent' })
       })
       .catch((error) => {
         console.error(error)
@@ -178,6 +186,7 @@ export default function ContactPage() {
                 Send
               </button>
             </p>
+            {actionData?.success?.message ? <p>{actionData.success.message}</p> : null}
           </Form>
         </div>
       </main>
