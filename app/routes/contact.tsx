@@ -6,7 +6,7 @@ import SuccessAlert from '~/components/success-alert'
 import LinkedIn from '~/components/svg/linkedin'
 import Twitter from '~/components/svg/twitter'
 import { validateTextInput, validateEmail, badRequest } from '~/utils/form'
-import { sgMail } from '~/utils/mail'
+import { sgMail } from '~/utils/mail.server'
 
 const FORM_NAME = 'contact'
 
@@ -51,15 +51,13 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   try {
-    if (process.env.NODE_ENV === 'production') {
-      await sgMail.send({
-        to: process.env.CONTACT_FORM_RECIPIENT ?? '',
-        from: process.env.VERIFIED_SENDER_EMAIL ?? '',
-        subject: 'New Contact Form Submission from Klemire.com',
-        text: fields.message,
-        html: `<ul><li>Name: ${fields.name}</li><li>Email: ${fields.email}</li><li>Message: ${message}</li></ul>`,
-      })
-    }
+    await sgMail.send({
+      to: process.env.CONTACT_FORM_RECIPIENT ?? '',
+      from: process.env.VERIFIED_SENDER_EMAIL ?? '',
+      subject: 'New Contact Form Submission from Klemire.com',
+      text: fields.message,
+      html: `<ul><li>Name: ${fields.name}</li><li>Email: ${fields.email}</li><li>Message: ${message}</li></ul>`,
+    })
   } catch (error) {
     json({ formError: `Problem sending email` }, { status: 500 })
   }
