@@ -27,6 +27,11 @@ export const links: LinksFunction = () => {
       as: 'image',
       href: '/images/me.jpg',
     },
+    {
+      rel: 'preload',
+      as: 'script',
+      href: 'https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Poppins:wght@400;600&display=swap',
+    },
   ]
 }
 
