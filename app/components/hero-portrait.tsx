@@ -113,10 +113,10 @@ const HeroPortrait = () => {
         </pattern>
         <image
           id='image0_62_755'
-          data-name='me.jpeg'
+          data-name='/images/me.jpg'
           width='1000'
           height='1258'
-          xlinkHref='/images/me.jpeg'
+          xlinkHref='/images/me.jpg'
         />
       </defs>
     </svg>

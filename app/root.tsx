@@ -7,7 +7,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
-import meSrc from '../public/images/me.jpeg'
 import tailwindStylesheetUrl from './styles/tailwind.css'
 
 export const links: LinksFunction = () => {
@@ -26,7 +25,7 @@ export const links: LinksFunction = () => {
     {
       rel: 'preload',
       as: 'image',
-      href: '/images/me.jpeg',
+      href: '/images/me.jpg',
     },
   ]
 }
