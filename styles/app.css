@@ -2,9 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-.button-primary {
-  @apply text-white border border-solid border-primary bg-primary rounded-md p-3 inline-flex items-center justify-between gap-2
-}
-.button-highlight {
-  @apply text-highlight bg-white border border-solid border-highlight rounded-md p-3 inline-flex items-center justify-between gap-2
+@layer base {
+  input, textarea{
+    @apply w-full mb-0
+  }
+  input {
+    @apply mb-2
+  }
+  label, button[type='submit'] {
+    @apply block mt-4
+  }
+  .button-primary {
+    @apply text-white border border-solid border-primary bg-primary rounded-md p-3 inline-flex items-center justify-between gap-2 transition-colors hover:bg-primary-dark
+  }
+  .button-highlight {
+    @apply text-highlight bg-white border border-solid border-highlight rounded-md p-3 inline-flex items-center justify-between gap-2 hover:bg-highlight transition-colors hover:text-white
+  }
+  .form-validation-error {
+    @apply text-red-700
+  }
 }
