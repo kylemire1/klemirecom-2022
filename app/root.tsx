@@ -6,9 +6,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useMatches,
 } from '@remix-run/react'
-
+import meSrc from '../public/images/me.jpeg'
 import tailwindStylesheetUrl from './styles/tailwind.css'
 
 export const links: LinksFunction = () => {
@@ -23,6 +22,11 @@ export const links: LinksFunction = () => {
     {
       rel: 'stylesheet',
       href: 'https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Poppins:wght@400;600&display=swap',
+    },
+    {
+      rel: 'preload',
+      as: 'image',
+      href: meSrc,
     },
   ]
 }
