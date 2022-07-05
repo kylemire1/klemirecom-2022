@@ -1,7 +1,8 @@
 import type { ActionFunction, MetaFunction } from '@remix-run/node'
 import { json } from '@remix-run/node'
-import { Form, useActionData } from '@remix-run/react'
+import { Form, useActionData, useTransition } from '@remix-run/react'
 import { Layout } from '~/components'
+import SuccessAlert from '~/components/success-alert'
 import LinkedIn from '~/components/svg/linkedin'
 import Twitter from '~/components/svg/twitter'
 import { validateTextInput, validateEmail, badRequest } from '~/utils/form'
@@ -30,7 +31,6 @@ export const action: ActionFunction = async ({ request }) => {
   const name = body.get('name')
   const email = body.get('email')
   const message = body.get('message')
-  const API_KEY = process.env.SENDGRID_API_KEY
 
   if (
     typeof name !== 'string' ||
@@ -38,10 +38,6 @@ export const action: ActionFunction = async ({ request }) => {
     typeof message !== 'string'
   ) {
     return json({ formError: `Form not submitted correctly` }, { status: 400 })
-  }
-
-  if (!API_KEY) {
-    return json({ formError: `Missing API Key` }, { status: 400 })
   }
 
   const fieldErrors = {
@@ -55,26 +51,23 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   try {
-    const msg = {
-      to: 'test@example.com', // Change to your recipient
-      from: email, // Change to your verified sender
-      subject: 'Sending with SendGrid is Fun',
-      text: message,
-      html: `<strong>${message}</strong>`,
+    if (process.env.NODE_ENV === 'production') {
+      await sgMail.send({
+        to: process.env.CONTACT_FORM_RECIPIENT ?? '',
+        from: process.env.VERIFIED_SENDER_EMAIL ?? '',
+        subject: 'New Contact Form Submission from Klemire.com',
+        text: fields.message,
+        html: `<ul><li>Name: ${fields.name}</li><li>Email: ${fields.email}</li><li>Message: ${message}</li></ul>`,
+      })
     }
-    sgMail
-      .send(msg)
-      .then(() => {
-        return json({ success: 'Message Sent' })
-      })
-      .catch((error) => {
-        console.error(error)
-      })
   } catch (error) {
-    console.error(error)
+    json({ formError: `Problem sending email` }, { status: 500 })
   }
 
-  return json(fields, { status: 200 })
+  return json(
+    { fields, success: { message: 'Message sent successfully!' } },
+    { status: 200 }
+  )
 }
 
 export const meta: MetaFunction = () => {
@@ -85,6 +78,8 @@ export const meta: MetaFunction = () => {
 
 export default function ContactPage() {
   const actionData = useActionData<ActionData>()
+  const transition = useTransition()
+
   return (
     <Layout>
       <main className='container grid grid-cols-12 h-[80vh] items-center'>
@@ -120,74 +115,95 @@ export default function ContactPage() {
             Not the DM'ing type?
           </h3>
           <p className='mb-4'>Shoot me an email instead!</p>
-          <Form replace className='block' name={FORM_NAME} method='post'>
-            <input type='hidden' name='form-name' value={FORM_NAME} />
-            <p>
-              <label>
-                Your Name:
-                <br />
-                <input
-                  type='text'
-                  name='name'
-                  defaultValue={actionData?.fields?.name}
-                  aria-invalid={Boolean(actionData?.fieldErrors?.name) || undefined}
-                  aria-errormessage={
-                    actionData?.fieldErrors?.name ? 'name-error' : undefined
-                  }
-                />
-              </label>
-              {actionData?.fieldErrors?.name ? (
-                <p className='form-validation-error' role='alert' id='name-error'>
-                  {actionData.fieldErrors.name}
+          {!actionData?.success ? (
+            <Form replace className='block' name={FORM_NAME} method='post'>
+              <fieldset disabled={transition.state === 'submitting'}>
+                <input type='hidden' name='form-name' value={FORM_NAME} />
+                <p>
+                  <label>
+                    Your Name:
+                    <br />
+                    <input
+                      type='text'
+                      name='name'
+                      defaultValue={actionData?.fields?.name}
+                      aria-invalid={Boolean(actionData?.fieldErrors?.name) || undefined}
+                      aria-errormessage={
+                        actionData?.fieldErrors?.name ? 'name-error' : undefined
+                      }
+                    />
+                  </label>
+                  {actionData?.fieldErrors?.name ? (
+                    <p className='form-validation-error' role='alert' id='name-error'>
+                      {actionData.fieldErrors.name}
+                    </p>
+                  ) : null}
                 </p>
-              ) : null}
-            </p>
-            <p>
-              <label>
-                Your Email:
-                <br />
-                <input
-                  type='email'
-                  name='email'
-                  defaultValue={actionData?.fields?.email}
-                  aria-invalid={Boolean(actionData?.fieldErrors?.email) || undefined}
-                  aria-errormessage={
-                    actionData?.fieldErrors?.email ? 'email-error' : undefined
-                  }
-                />
-              </label>
-              {actionData?.fieldErrors?.email ? (
-                <p className='form-validation-error' role='alert' id='email-error'>
-                  {actionData.fieldErrors.email}
+                <p>
+                  <label>
+                    Your Email:
+                    <br />
+                    <input
+                      type='email'
+                      name='email'
+                      defaultValue={actionData?.fields?.email}
+                      aria-invalid={
+                        Boolean(actionData?.fieldErrors?.email) || undefined
+                      }
+                      aria-errormessage={
+                        actionData?.fieldErrors?.email ? 'email-error' : undefined
+                      }
+                    />
+                  </label>
+                  {actionData?.fieldErrors?.email ? (
+                    <p className='form-validation-error' role='alert' id='email-error'>
+                      {actionData.fieldErrors.email}
+                    </p>
+                  ) : null}
                 </p>
-              ) : null}
-            </p>
-            <p>
-              <label>
-                Message:
-                <br />
-                <textarea
-                  name='message'
-                  defaultValue={actionData?.fields?.message}
-                  aria-invalid={Boolean(actionData?.fieldErrors?.message) || undefined}
-                  aria-errormessage={
-                    actionData?.fieldErrors?.message ? 'message-error' : undefined
-                  }
-                ></textarea>
-              </label>
-              {actionData?.fieldErrors?.message ? (
-                <p className='form-validation-error' role='alert' id='message-error'>
-                  {actionData.fieldErrors.message}
+                <p>
+                  <label>
+                    Message:
+                    <br />
+                    <textarea
+                      name='message'
+                      defaultValue={actionData?.fields?.message}
+                      aria-invalid={
+                        Boolean(actionData?.fieldErrors?.message) || undefined
+                      }
+                      aria-errormessage={
+                        actionData?.fieldErrors?.message ? 'message-error' : undefined
+                      }
+                    ></textarea>
+                  </label>
+                  {actionData?.fieldErrors?.message ? (
+                    <p
+                      className='form-validation-error'
+                      role='alert'
+                      id='message-error'
+                    >
+                      {actionData.fieldErrors.message}
+                    </p>
+                  ) : null}
                 </p>
-              ) : null}
-            </p>
-            <p>
-              <button className='block text-center button-primary w-full' type='submit'>
-                Send
-              </button>
-            </p>
-            {actionData?.success?.message ? <p>{actionData.success.message}</p> : null}
-          </Form>
+                <p>
+                  <button
+                    className='block text-center button-primary w-full'
+                    type='submit'
+                  >
+                    {transition.state === 'submitting' ? 'Sending...' : 'Send'}
+                  </button>
+                </p>
+                {actionData?.success?.message ? (
+                  <p>{actionData.success.message}</p>
+                ) : null}
+              </fieldset>
+            </Form>
+          ) : (
+            <div>
+              <SuccessAlert message={actionData.success.message} />
+            </div>
+          )}
         </div>
       </main>
     </Layout>
