@@ -5,6 +5,7 @@ import { Layout } from '~/components'
 import LinkedIn from '~/components/svg/linkedin'
 import Twitter from '~/components/svg/twitter'
 import { validateTextInput, validateEmail, badRequest, encode } from '~/utils/form'
+import sgMail from '@sendgrid/mail'
 
 const FORM_NAME = 'contact'
 
@@ -46,17 +47,21 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   try {
-    const formBody = encode({
-      'form-name': FORM_NAME,
-      ...fields,
-    })
-    console.log(formBody)
-    const res = await fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formBody,
-    })
-    console.log(res)
+    const msg = {
+      to: 'test@example.com', // Change to your recipient
+      from: email, // Change to your verified sender
+      subject: 'Sending with SendGrid is Fun',
+      text: message,
+      html: `<strong>${message}</strong>`,
+    }
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent')
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   } catch (error) {
     console.error(error)
   }
