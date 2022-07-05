@@ -5,7 +5,7 @@ import HeroPortrait from './hero-portrait'
 const HeroSection = () => {
   return (
     <div className='relative grid min-h-hero grid-cols-12'>
-      <div className='col-span-full space-y-6 xl:col-span-8'>
+      <div className='col-span-full space-y-6 xl:col-span-8 animate-in slide-in-from-bottom-2  fade-in-0  duration-1000 ease-out'>
         <h2 className='mt-28 text-4xl font-semibold leading-snug md:text-5xl md:leading-snug'>
           Approaching front end engineering with{' '}
           <span className='text-highlight'>passion</span> and{' '}
@@ -31,7 +31,7 @@ const HeroSection = () => {
       <div
         role='img'
         aria-label='Kyle Lemire smiling among colored circles'
-        className='absolute -right-32 top-44 -z-10 hidden lg:block xl:top-0 2xl:-top-14 2xl:-right-20'
+        className='absolute -right-32 top-44 -z-10 hidden lg:block xl:top-0 2xl:-top-14 2xl:-right-20 animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out'
       >
         <HeroPortrait />
       </div>

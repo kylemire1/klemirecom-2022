@@ -1,6 +1,7 @@
 import type { ActionFunction, MetaFunction } from '@remix-run/node'
 import { json } from '@remix-run/node'
-import { Form, useActionData, useTransition } from '@remix-run/react'
+import { Form, useActionData, useLocation, useTransition } from '@remix-run/react'
+import { useEffect, useLayoutEffect } from 'react'
 import { Layout } from '~/components'
 import SuccessAlert from '~/components/success-alert'
 import LinkedIn from '~/components/svg/linkedin'
