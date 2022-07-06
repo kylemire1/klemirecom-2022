@@ -1,13 +1,12 @@
 import type { ActionFunction, MetaFunction } from '@remix-run/node'
 import { json } from '@remix-run/node'
-import { Form, useActionData, useLocation, useTransition } from '@remix-run/react'
-import { useEffect, useLayoutEffect } from 'react'
+import { Form, useActionData, useTransition } from '@remix-run/react'
 import { Layout } from '~/components'
 import SuccessAlert from '~/components/success-alert'
 import LinkedIn from '~/components/svg/linkedin'
 import Twitter from '~/components/svg/twitter'
 import { validateTextInput, validateEmail, badRequest } from '~/utils/form'
-import { sgMail } from '~/utils/mail.server'
+import { sendMail } from '~/utils/mail.server'
 
 const FORM_NAME = 'contact'
 
@@ -52,13 +51,7 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   try {
-    await sgMail.send({
-      to: process.env.CONTACT_FORM_RECIPIENT ?? '',
-      from: process.env.VERIFIED_SENDER_EMAIL ?? '',
-      subject: 'New Contact Form Submission from Klemire.com',
-      text: fields.message,
-      html: `<ul><li>Name: ${fields.name}</li><li>Email: ${fields.email}</li><li>Message: ${message}</li></ul>`,
-    })
+    await sendMail({ message, name, email })
   } catch (error) {
     json({ formError: `Problem sending email` }, { status: 500 })
   }
@@ -81,7 +74,7 @@ export default function ContactPage() {
 
   return (
     <Layout>
-      <main className='container grid grid-cols-12 h-[80vh] items-center'>
+      <main id='talk' className='container grid grid-cols-12 items-center'>
         <div className="h-max lg:py-18 relative col-span-full rounded-md bg-brand-light px-8 py-16 before:absolute before:-top-80 before:-left-72 before:-z-10 before:h-[575px] before:w-[634px] before:bg-[url('/images/circles-vector.svg')] after:absolute after:-right-32 after:-bottom-[350px]  after:-z-10 after:h-[650px] after:w-[575px] after:bg-[url('/images/circles-solid.svg')] after:bg-no-repeat md:col-span-6 md:col-start-4 md:px-14 lg:after:block xl:py-24 xl:px-24">
           <h2 className='mb-2 text-3xl font-semibold md:text-4xl'>Let's talk!</h2>
           <p className='pb-2'>Here are a few places you can find me.</p>

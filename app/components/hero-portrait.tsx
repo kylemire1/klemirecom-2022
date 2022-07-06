@@ -11,7 +11,10 @@ const HeroPortrait = () => {
       xmlnsXlink='http://www.w3.org/1999/xlink'
     >
       <g id='Group 9'>
-        <g id='g222'>
+        <g
+          id='g222'
+          className='animate-hero-circle-purple-lg duration-slow repeat-infinite direction-alternate'
+        >
           <g id='g236'>
             <g id='g234'>
               <g id='g232'>
@@ -24,7 +27,10 @@ const HeroPortrait = () => {
             </g>
           </g>
         </g>
-        <g id='g222_2'>
+        <g
+          id='g222_2'
+          className='animate-hero-circle-purple-sm duration-slow repeat-infinite direction-alternate'
+        >
           <g id='g236_2'>
             <g id='g234_2'>
               <g id='g232_2'>
@@ -68,7 +74,10 @@ const HeroPortrait = () => {
             />
           </g>
         </g>
-        <g id='Shapes'>
+        <g
+          id='Shapes'
+          className='animate-hero-circle-orange-lg duration-slow repeat-infinite direction-alternate'
+        >
           <g id='g222_3'>
             <g id='g236_3'>
               <g id='g234_3'>
@@ -83,7 +92,10 @@ const HeroPortrait = () => {
             </g>
           </g>
         </g>
-        <g id='Shapes_2'>
+        <g
+          id='Shapes_2'
+          className='animate-hero-circle-orange-sm duration-slow repeat-infinite direction-alternate'
+        >
           <g id='g222_4'>
             <g id='g236_4'>
               <g id='g234_4'>

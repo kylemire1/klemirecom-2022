@@ -7,6 +7,73 @@ module.exports = {
       center: true,
     },
     extend: {
+      animationDuration: {
+        slow: '10000ms',
+      },
+      animation: {
+        'hero-circle-orange-lg': 'heroOrangeLarge',
+        'hero-circle-orange-sm': 'heroOrangeSmall',
+        'hero-circle-purple-lg': 'heroPurpleLarge',
+        'hero-circle-purple-sm': 'heroPurpleSmall',
+      },
+      keyframes: {
+        heroPurpleSmall: {
+          '0%': {
+            transform: 'translate(0px, 0px)',
+          },
+          '15%': {
+            transform: 'translate(5px, 5px)',
+          },
+          '40%': {
+            transform: 'translate(-5px, -5px)',
+          },
+          '100%': {
+            transform: 'translate(-2px, -2px)',
+          },
+        },
+        heroPurpleLarge: {
+          '0%': {
+            transform: 'translate(0px, 0px)',
+          },
+          '50%': {
+            transform: 'translate(-5px, -5px)',
+          },
+          '80%': {
+            transform: 'translate(0px, 10px)',
+          },
+          '100%': {
+            transform: 'translate(-2px, 5px)',
+          },
+        },
+        heroOrangeSmall: {
+          '0%': {
+            transform: 'translate(0px, 0px)',
+          },
+          '25%': {
+            transform: 'translate(5px, -5px)',
+          },
+          '75%': {
+            transform: 'translate(-5px, -5px)',
+          },
+          '100%': {
+            transform: 'translate(2px, 2px)',
+          },
+        },
+        heroOrangeLarge: {
+          '0%': {
+            transform: 'translate(0px, 0px)',
+          },
+          '33%': {
+            transform: 'translate(5px, 5px)',
+          },
+          '66%': {
+            transform: 'translate(-5px, -5px)',
+          },
+          '100%': {
+            transform: 'translate(-2px, -2px)',
+          },
+        },
+      },
       minHeight: {
         hero: '45rem',
       },
