@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  input, textarea{
-    @apply w-full mb-0
+  textarea{
+    @apply w-full mb-0 rounded-md
   }
-  input {
-    @apply mb-2
+  input[type='text'], input[type="email"] {
+    @apply w-full mb-2 rounded-md
   }
   label, button[type='submit'] {
     @apply block mt-4

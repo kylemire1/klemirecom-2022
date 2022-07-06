@@ -1,9 +1,9 @@
 node_modules
 .DS_Store
+public/.DS_Store
 /.cache
 /public/build
 /.netlify
 .env
-/app/tailwind.css
-/styles/tailwind.css
+app//styles/tailwind.css
 remix.config.js
