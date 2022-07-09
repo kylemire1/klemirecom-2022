@@ -9,16 +9,38 @@
   input[type='text'], input[type="email"] {
     @apply w-full mb-2 rounded-md
   }
-  label, button[type='submit'] {
+  label {
     @apply block mt-4
+  }
+  button[type="submit"] {
+    @apply block mt-2
   }
   .button-primary {
     @apply text-white border border-solid border-primary bg-primary rounded-md p-3 inline-flex items-center justify-between gap-2 transition-colors hover:bg-primary-dark
   }
   .button-highlight {
-    @apply text-highlight bg-white border border-solid border-highlight rounded-md p-3 inline-flex items-center justify-between gap-2 hover:bg-highlight transition-colors hover:text-white
+    @apply text-white bg-highlight border border-solid border-highlight rounded-md p-3 inline-flex items-center justify-between gap-2 hover:bg-highlight-dark transition-colors
   }
   .form-validation-error {
     @apply text-red-700
   }
+}
+
+.recaptcha-wrapper {
+  display: inline-block;
+  overflow: hidden;
+  width: 220px;   /* note the embedded iframe is 302x76 */
+  height: 65px;
+  text-align: left;
+  padding-top: 10px;
+}
+
+.recaptcha-wrapper iframe {
+  position: relative;
+  left: -1px;
+  top: -12px;
+}
+
+.recaptcha-wrapper iframe .rc-anchor-checkbox-label {
+  font-family: 'Open Sans' !important;
 }

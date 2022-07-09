@@ -1,5 +1,3 @@
-import meSrc from '../../public/images/me.jpeg'
-
 const HeroPortrait = () => {
   return (
     <svg

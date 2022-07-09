@@ -1,14 +1,15 @@
 import type { ActionFunction, MetaFunction } from '@remix-run/node'
 import { json } from '@remix-run/node'
-import { Form, useActionData, useTransition } from '@remix-run/react'
+import { Form, useActionData, useSubmit, useTransition } from '@remix-run/react'
 import { Layout } from '~/components'
 import SuccessAlert from '~/components/success-alert'
 import LinkedIn from '~/components/svg/linkedin'
 import Twitter from '~/components/svg/twitter'
 import { validateTextInput, validateEmail, badRequest } from '~/utils/form'
 import { sendMail } from '~/utils/mail.server'
-
-const FORM_NAME = 'contact'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { useRef, useState } from 'react'
+import { isDom } from '~/utils/helpers'
 
 export type ActionData = {
   formError?: string
@@ -16,11 +17,13 @@ export type ActionData = {
     name: string | undefined
     email: string | undefined
     message: string | undefined
+    token: string | undefined
   }
   fields?: {
     name: string
     email: string
     message: string | undefined
+    token: string | undefined
   }
   success?: {
     message: string
@@ -31,11 +34,13 @@ export const action: ActionFunction = async ({ request }) => {
   const name = body.get('name')
   const email = body.get('email')
   const message = body.get('message')
+  const token = body.get('token')
 
   if (
     typeof name !== 'string' ||
     typeof email !== 'string' ||
-    typeof message !== 'string'
+    typeof message !== 'string' ||
+    typeof token !== 'string'
   ) {
     return json({ formError: `Form not submitted correctly` }, { status: 400 })
   }
@@ -44,8 +49,9 @@ export const action: ActionFunction = async ({ request }) => {
     name: validateTextInput(name, 'Name'),
     email: validateEmail(email),
     message: validateTextInput(message, 'Message'),
+    token: validateTextInput(token, 'Recaptcha Verification'),
   }
-  const fields = { name, email, message }
+  const fields = { name, email, message, token }
   if (Object.values(fieldErrors).some(Boolean)) {
     return badRequest({ fieldErrors, fields })
   }
@@ -71,13 +77,24 @@ export const meta: MetaFunction = () => {
 export default function ContactPage() {
   const actionData = useActionData<ActionData>()
   const transition = useTransition()
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
+  const [token, setToken] = useState<string | null>(null)
+
+  const handleCaptchaChange = (response: string | null) => {
+    setToken(response)
+  }
 
   return (
     <Layout>
       <main id='talk' className='container grid grid-cols-12 items-center'>
-        <div className="h-max lg:py-18 relative col-span-full rounded-md bg-brand-light px-8 py-16 before:absolute before:-top-80 before:-left-72 before:-z-10 before:h-[575px] before:w-[634px] before:bg-[url('/images/circles-vector.svg')] after:absolute after:-right-32 after:-bottom-[350px]  after:-z-10 after:h-[650px] after:w-[575px] after:bg-[url('/images/circles-solid.svg')] after:bg-no-repeat md:col-span-6 md:col-start-4 md:px-14 lg:after:block xl:py-24 xl:px-24">
-          <h2 className='mb-2 text-3xl font-semibold md:text-4xl'>Let's talk!</h2>
-          <p className='pb-2'>Here are a few places you can find me.</p>
+        <div className="h-max lg:py-18 relative col-span-full rounded-md bg-brand-light px-8 py-16 before:absolute before:-top-80 before:-left-72 before:-z-10 before:h-[575px] before:w-[634px] before:bg-[url('/images/circles-vector.svg')] after:absolute after:-right-32 after:-bottom-[350px]  after:-z-10 after:h-[650px] after:w-[575px] after:bg-[url('/images/circles-solid.svg')] after:bg-no-repeat md:col-span-8 md:col-start-3 md:px-14 lg:after:block xl:py-24 xl:px-24">
+          <h2 className='mb-2 text-3xl font-semibold md:text-4xl'>
+            Looking for me?{' '}
+            <span aria-hidden role='presentation'>
+              👀
+            </span>
+          </h2>
+          <p className='pb-2'>Here are a few places you can say &#8220;Hi!&#8221;</p>
           <div className='mb-8'>
             <ul className='flex gap-4'>
               <li>
@@ -108,10 +125,10 @@ export default function ContactPage() {
           </h3>
           <p className='mb-4'>Shoot me an email instead!</p>
           {!actionData?.success ? (
-            <Form replace className='block' name={FORM_NAME} method='post'>
+            <Form className='block' method='post'>
               <fieldset disabled={transition.state === 'submitting'}>
-                <input type='hidden' name='form-name' value={FORM_NAME} />
-                <p>
+                <input type='hidden' value={token ?? ''} name='token' />
+                <div>
                   <label>
                     Your Name:
                     <br />
@@ -130,8 +147,8 @@ export default function ContactPage() {
                       {actionData.fieldErrors.name}
                     </p>
                   ) : null}
-                </p>
-                <p>
+                </div>
+                <div>
                   <label>
                     Your Email:
                     <br />
@@ -152,8 +169,8 @@ export default function ContactPage() {
                       {actionData.fieldErrors.email}
                     </p>
                   ) : null}
-                </p>
-                <p>
+                </div>
+                <div className='mb-2'>
                   <label>
                     Message:
                     <br />
@@ -177,19 +194,64 @@ export default function ContactPage() {
                       {actionData.fieldErrors.message}
                     </p>
                   ) : null}
-                </p>
-                <p>
+                </div>
+                {isDom() ? (
+                  <div className='recaptcha-wrapper'>
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey={window.ENV.RECAPTCHA_SITE_KEY}
+                      size='normal'
+                      onChange={handleCaptchaChange}
+                    />
+                  </div>
+                ) : (
+                  <div className='recaptcha-wrapper'>
+                    <div></div>
+                  </div>
+                )}
+                {actionData?.fieldErrors?.message ? (
+                  <p className='form-validation-error' role='alert' id='message-error'>
+                    {actionData.fieldErrors.token}
+                  </p>
+                ) : null}
+                <div>
                   <button
-                    className='block text-center button-primary w-full'
+                    className='block text-center button-primary w-full mt-0'
                     type='submit'
                   >
                     {transition.state === 'submitting' ? 'Sending...' : 'Send'}
                   </button>
-                </p>
+                </div>
                 {actionData?.success?.message ? (
                   <p>{actionData.success.message}</p>
                 ) : null}
               </fieldset>
+              <p className='text-center mt-4 text-xs'>
+                Protected by Google{' '}
+                <img
+                  className='inline-block w-6'
+                  src='https://www.gstatic.com/recaptcha/api2/logo_48.png'
+                  alt=''
+                />{' '}
+                reCAPTCHA.{' '}
+                <span className='whitespace-nowrap block'>
+                  <a
+                    href='https://policies.google.com/privacy?hl=en'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    Privacy
+                  </a>{' '}
+                  <span aria-hidden>|</span>{' '}
+                  <a
+                    href='https://policies.google.com/terms?hl=en'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    Terms
+                  </a>
+                </span>
+              </p>
             </Form>
           ) : (
             <div>

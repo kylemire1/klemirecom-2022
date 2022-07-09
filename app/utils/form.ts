@@ -1,5 +1,5 @@
 import { json } from '@remix-run/node'
-import { ActionData } from '~/routes/contact'
+import type { ActionData } from '~/routes/contact'
 
 export const encode = (data: Record<any, any>) => {
   if (!data) return ''

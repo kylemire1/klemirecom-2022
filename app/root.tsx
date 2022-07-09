@@ -1,4 +1,5 @@
 import type { LinksFunction, MetaFunction } from '@remix-run/node'
+import { json } from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -6,8 +7,21 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from '@remix-run/react'
+import type { EnvType } from 'window'
 import tailwindStylesheetUrl from './styles/tailwind.css'
+
+type LoaderData = {
+  ENV: EnvType
+}
+export async function loader() {
+  return json({
+    ENV: {
+      RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
+    },
+  })
+}
 
 export const links: LinksFunction = () => {
   return [
@@ -37,6 +51,7 @@ export const meta: MetaFunction = () => ({
 })
 
 export default function App() {
+  const data = useLoaderData<LoaderData>()
   return (
     <html
       lang='en'
@@ -48,6 +63,11 @@ export default function App() {
       </head>
       <body className={`h-full overflow-x-hidden font-poppins text-lg`}>
         <Outlet />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+          }}
+        />
         <LiveReload />
         <ScrollRestoration />
         <Scripts />

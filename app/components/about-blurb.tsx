@@ -23,7 +23,7 @@ const AboutBlurb = () => {
           teaching another developer a subject I am excited about or testing UI
           components to make sure they are accessible to users of any ability.
         </p>
-        <Link className='button-highlight' to='/contact#talk'>
+        <Link className='button-primary' to='/contact#talk'>
           Think we could work together? <ArrowRightIcon width='1.5rem' />
         </Link>
       </div>

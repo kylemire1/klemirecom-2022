@@ -82,6 +82,7 @@ module.exports = {
         'primary-dark': '#542880',
         'primary-darker': '#461c70',
         highlight: '#FF5D3A',
+        'highlight-dark': '#d84a2b',
         'brand-light': '#F7F7F7',
         'brand-medium': '#e5e5e5',
         'brand-dark': '#C4C4C4',
