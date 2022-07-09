@@ -9,11 +9,8 @@
   input[type='text'], input[type="email"] {
     @apply w-full mb-2 rounded-md
   }
-  label {
+  label,  button[type="submit"] {
     @apply block mt-4
-  }
-  button[type="submit"] {
-    @apply block mt-2
   }
   .button-primary {
     @apply text-white border border-solid border-primary bg-primary rounded-md p-3 inline-flex items-center justify-between gap-2 transition-colors hover:bg-primary-dark

@@ -1,4 +1,5 @@
 import type { ActionFunction, MetaFunction } from '@remix-run/node'
+import { fetch } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Form, useActionData, useTransition } from '@remix-run/react'
 import { Layout } from '~/components'
@@ -7,9 +8,7 @@ import LinkedIn from '~/components/svg/linkedin'
 import Twitter from '~/components/svg/twitter'
 import { validateTextInput, validateEmail, badRequest } from '~/utils/form'
 import { sendMail } from '~/utils/mail.server'
-import ReCAPTCHA from 'react-google-recaptcha'
-import { useRef, useState } from 'react'
-import { isDom } from '~/utils/helpers'
+import { useRecaptcha } from '~/utils/hooks/useRecaptcha'
 
 export type ActionData = {
   formError?: string
@@ -57,6 +56,24 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   try {
+    const result = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+      {
+        method: 'post',
+      }
+    ).then((r) => r.json())
+
+    if (!result.success || result.score < 0.5) {
+      json({ formError: `reCAPTCHA verification failed` }, { status: 422 })
+    }
+  } catch (error) {
+    json(
+      { formError: `There was a problem communicating with the verification server.` },
+      { status: 500 }
+    )
+  }
+
+  try {
     await sendMail({ message, name, email })
   } catch (error) {
     json({ formError: `Problem sending email` }, { status: 500 })
@@ -77,12 +94,7 @@ export const meta: MetaFunction = () => {
 export default function ContactPage() {
   const actionData = useActionData<ActionData>()
   const transition = useTransition()
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
-  const [token, setToken] = useState<string | null>(null)
-
-  const handleCaptchaChange = (response: string | null) => {
-    setToken(response)
-  }
+  const { token, handleReCaptchaVerify } = useRecaptcha({ action: 'contact' })
 
   return (
     <Layout>
@@ -140,6 +152,7 @@ export default function ContactPage() {
                       aria-errormessage={
                         actionData?.fieldErrors?.name ? 'name-error' : undefined
                       }
+                      onBlur={handleReCaptchaVerify}
                     />
                   </label>
                   {actionData?.fieldErrors?.name ? (
@@ -162,6 +175,7 @@ export default function ContactPage() {
                       aria-errormessage={
                         actionData?.fieldErrors?.email ? 'email-error' : undefined
                       }
+                      onBlur={handleReCaptchaVerify}
                     />
                   </label>
                   {actionData?.fieldErrors?.email ? (
@@ -175,6 +189,7 @@ export default function ContactPage() {
                     Message:
                     <br />
                     <textarea
+                      onBlur={handleReCaptchaVerify}
                       name='message'
                       defaultValue={actionData?.fields?.message}
                       aria-invalid={
@@ -195,20 +210,6 @@ export default function ContactPage() {
                     </p>
                   ) : null}
                 </div>
-                {isDom() ? (
-                  <div className='recaptcha-wrapper'>
-                    <ReCAPTCHA
-                      ref={recaptchaRef}
-                      sitekey={window.ENV.RECAPTCHA_SITE_KEY}
-                      size='normal'
-                      onChange={handleCaptchaChange}
-                    />
-                  </div>
-                ) : (
-                  <div className='recaptcha-wrapper'>
-                    <div></div>
-                  </div>
-                )}
                 {actionData?.fieldErrors?.message ? (
                   <p className='form-validation-error' role='alert' id='message-error'>
                     {actionData.fieldErrors.token}
@@ -226,32 +227,6 @@ export default function ContactPage() {
                   <p>{actionData.success.message}</p>
                 ) : null}
               </fieldset>
-              <p className='text-center mt-4 text-xs'>
-                Protected by Google{' '}
-                <img
-                  className='inline-block w-6'
-                  src='https://www.gstatic.com/recaptcha/api2/logo_48.png'
-                  alt=''
-                />{' '}
-                reCAPTCHA.{' '}
-                <span className='whitespace-nowrap block'>
-                  <a
-                    href='https://policies.google.com/privacy?hl=en'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    Privacy
-                  </a>{' '}
-                  <span aria-hidden>|</span>{' '}
-                  <a
-                    href='https://policies.google.com/terms?hl=en'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    Terms
-                  </a>
-                </span>
-              </p>
             </Form>
           ) : (
             <div>
