@@ -1,6 +1,6 @@
 import type { ActionFunction, MetaFunction } from '@remix-run/node'
 import { json } from '@remix-run/node'
-import { Form, useActionData, useSubmit, useTransition } from '@remix-run/react'
+import { Form, useActionData, useTransition } from '@remix-run/react'
 import { Layout } from '~/components'
 import SuccessAlert from '~/components/success-alert'
 import LinkedIn from '~/components/svg/linkedin'
@@ -96,7 +96,7 @@ export default function ContactPage() {
           </h2>
           <p className='pb-2'>Here are a few places you can say &#8220;Hi!&#8221;</p>
           <div className='mb-8'>
-            <ul className='flex gap-4'>
+            <ul className='flex items-center gap-4'>
               <li>
                 <a
                   className='flex gap-2 items-center'
