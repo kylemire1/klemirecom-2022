@@ -13,10 +13,10 @@
     @apply block mt-4
   }
   .button-primary {
-    @apply text-base font-semibold text-white border border-solid border-primary bg-primary rounded-md p-3 inline-flex items-center justify-between gap-2 transition-colors hover:bg-primary-dark focus:bg-primary-dark
+    @apply  font-semibold text-white border border-solid border-primary bg-primary rounded-md p-3 inline-flex items-center justify-between gap-2 transition-colors hover:bg-primary-dark focus:bg-primary-dark
   }
   .button-secondary {
-    @apply text-primary text-base font-semibold bg-brand-light border-solid border border-brand-dark rounded-md p-3 inline-flex items-center justify-between gap-2  focus:border-primary hover:border-primary transition-colors
+    @apply text-primary  font-semibold bg-brand-light border-solid border border-brand-dark rounded-md p-3 inline-flex items-center justify-between gap-2  focus:border-primary hover:border-primary transition-colors
   }
   .form-validation-error {
     @apply text-red-700
