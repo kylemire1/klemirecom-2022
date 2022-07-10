@@ -10,7 +10,7 @@ const HeroSection = () => {
           Approaching front end engineering with{' '}
           <span className='text-highlight'>passion</span> and{' '}
           <span className='text-primary'>enthusiasm</span>{' '}
-          <span aria-label='confetti' role='img'>
+          <span aria-label='confetti popper' role='img'>
             🎉
           </span>
         </h2>

@@ -43,10 +43,11 @@ module.exports = {
             transform: 'translate(0px, 10px)',
             opacity: 0,
           },
-          '75%': {
+          '50%': {
             transform: 'translate(0px, 10px)',
             opacity: 0,
           },
+          '75%': { transform: 'translate(0px, 0px)', opacity: 1 },
           '100%': {
             transform: 'translate(0px, 0px)',
             opacity: 1,
