@@ -28,7 +28,6 @@ export async function loader() {
 
 export const links: LinksFunction = () => {
   return [
-    { rel: 'stylesheet', href: tailwindStylesheetUrl },
     {
       rel: 'preload',
       href: '/fonts/Poppins/Poppins-Regular.ttf',
@@ -43,6 +42,7 @@ export const links: LinksFunction = () => {
       type: 'font/ttf',
       crossOrigin: 'anonymous',
     },
+    { rel: 'stylesheet', href: tailwindStylesheetUrl },
   ]
 }
 
