@@ -7,6 +7,7 @@ import { validateTextInput, validateEmail } from '~/utils/form'
 import { sendMail } from '~/utils/mail.server'
 import { passesSuccess, useRecaptcha, verifyToken } from '~/utils/recaptcha'
 import Socials from '~/components/socials'
+import { generateMetaFunction } from '~/utils/helpers'
 
 export type ActionData = {
   formError?: string
@@ -79,11 +80,7 @@ export const action: ActionFunction = async ({ request }) => {
   )
 }
 
-export const meta: MetaFunction = () => {
-  return {
-    title: 'Contact',
-  }
-}
+export const meta = generateMetaFunction({ title: 'Contact' })
 
 export default function ContactPage() {
   const actionData = useActionData<ActionData>()
@@ -93,7 +90,7 @@ export default function ContactPage() {
   return (
     <Layout>
       <main id='talk' className='container grid grid-cols-12 items-center'>
-        <div className="h-max lg:py-18 relative col-span-full rounded-md bg-brand-light px-8 py-16 before:absolute before:-top-80 before:-left-72 before:-z-10 before:h-[575px] before:w-[634px] before:bg-[url('/images/circles-vector.svg')] after:absolute after:-right-32 after:-bottom-[350px]  after:-z-10 after:h-[650px] after:w-[575px] after:bg-[url('/images/circles-solid.svg')] after:bg-no-repeat md:col-span-8 md:col-start-3 md:px-14 lg:after:block xl:py-24 xl:px-24">
+        <div className="h-max lg:py-18 relative col-span-full rounded-md bg-brand-light px-8 py-16 before:absolute before:-top-80 before:-left-72 before:-z-10 before:h-[575px] before:w-[634px] before:bg-[url('/images/circles-vector.svg')] after:absolute after:-right-32 after:-bottom-[110px]  after:-z-10 after:h-[660px] after:w-[575px] after:bg-[url('/images/circles-solid.svg')] after:bg-no-repeat md:col-span-8 md:col-start-3 md:px-14 lg:after:block xl:py-24 xl:px-24">
           <h2 className='mb-2 text-3xl font-semibold md:text-4xl'>
             Looking for me?{' '}
             <span aria-hidden role='presentation'>
@@ -191,7 +188,9 @@ export default function ContactPage() {
                     className='block text-center button-primary w-full mt-0'
                     type='submit'
                   >
-                    {transition.state === 'submitting' ? 'Sending...' : 'Send'}
+                    {transition.state === 'submitting'
+                      ? 'Submitting...'
+                      : 'Submit Form'}
                   </button>
                 </div>
                 {actionData?.success?.message ? (

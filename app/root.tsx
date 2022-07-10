@@ -13,6 +13,7 @@ import {
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 import type { EnvType } from 'window'
 import tailwindStylesheetUrl from './styles/tailwind.css'
+import { generateMetaFunction } from './utils/helpers'
 
 type LoaderData = {
   ENV: EnvType
@@ -46,11 +47,7 @@ export const links: LinksFunction = () => {
   ]
 }
 
-export const meta: MetaFunction = () => ({
-  charset: 'utf-8',
-  title: 'Kyle Lemire | Chicago-based Front End Engineer',
-  viewport: 'width=device-width,initial-scale=1',
-})
+export const meta = generateMetaFunction()
 
 export default function App() {
   const data = useLoaderData<LoaderData>()

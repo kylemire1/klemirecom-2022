@@ -622,6 +622,9 @@ label,   button[type="submit"] {
   --tw-bg-opacity: 1;
   background-color: rgb(102 51 153 / var(--tw-bg-opacity));
   padding: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
   transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
@@ -632,6 +635,11 @@ label,   button[type="submit"] {
 }
 
 .button-primary:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(84 40 128 / var(--tw-bg-opacity));
+}
+
+.button-primary:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(84 40 128 / var(--tw-bg-opacity));
 }
@@ -649,6 +657,9 @@ label,   button[type="submit"] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 93 58 / var(--tw-bg-opacity));
   padding: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
   transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
@@ -659,6 +670,11 @@ label,   button[type="submit"] {
 }
 
 .button-highlight:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(216 74 43 / var(--tw-bg-opacity));
+}
+
+.button-highlight:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(216 74 43 / var(--tw-bg-opacity));
 }
@@ -1541,9 +1557,9 @@ label,   button[type="submit"] {
   bottom: -512px;
 }
 
-.after\:-bottom-\[350px\]::after {
+.after\:-bottom-\[110px\]::after {
   content: var(--tw-content);
-  bottom: -350px;
+  bottom: -110px;
 }
 
 .after\:-z-10::after {
@@ -1556,9 +1572,9 @@ label,   button[type="submit"] {
   height: 672px;
 }
 
-.after\:h-\[650px\]::after {
+.after\:h-\[660px\]::after {
   content: var(--tw-content);
-  height: 650px;
+  height: 660px;
 }
 
 .after\:w-\[575px\]::after {
@@ -1641,6 +1657,10 @@ label,   button[type="submit"] {
 
   .lg\:mb-24 {
     margin-bottom: 6rem;
+  }
+
+  .lg\:mt-16 {
+    margin-top: 4rem;
   }
 
   .lg\:block {
