@@ -5,7 +5,7 @@ const AboutBlurb = () => {
   return (
     <div id='about' className='mt-16 grid grid-cols-12 lg:mt-24'>
       <div className='col-span-full rounded-lg border border-solid border-primary bg-white py-12 px-12 lg:col-span-7   xl:py-28 xl:px-32'>
-        <h5 className='mb-8 text-3xl font-semibold leading-snug md:text-4xl md:leading-snug'>
+        <h5 className='mb-8 text-3xl font-bold leading-snug md:text-4xl md:leading-snug'>
           <span className='block text-highlight'>Hey there! I'm Kyle Lemire. </span>I
           love to build accessible software with React.{' '}
           <div className='inline-block whitespace-nowrap'>

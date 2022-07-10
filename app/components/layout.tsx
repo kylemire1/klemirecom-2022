@@ -8,7 +8,7 @@ const Layout = ({ children }: { children?: React.ReactNode }) => {
       <nav className='container flex justify-between py-8'>
         <div>
           <Link to='/'>
-            <h1 className='mr-4 text-2xl font-semibold'>Kyle Lemire</h1>
+            <h1 className='mr-4 text-2xl font-bold'>Kyle Lemire</h1>
           </Link>
         </div>
         <ul className='flex items-center justify-center gap-7'>

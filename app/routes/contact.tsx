@@ -91,7 +91,7 @@ export default function ContactPage() {
     <Layout>
       <main id='talk' className='container grid grid-cols-12 items-center'>
         <div className="h-max lg:py-18 relative col-span-full rounded-md bg-brand-light px-8 py-16 before:absolute before:-top-80 before:-left-72 before:-z-10 before:h-[575px] before:w-[634px] before:bg-[url('/images/circles-vector.svg')] after:absolute after:-right-32 after:-bottom-[110px]  after:-z-10 after:h-[660px] after:w-[575px] after:bg-[url('/images/circles-solid.svg')] after:bg-no-repeat md:col-span-8 md:col-start-3 md:px-14 lg:after:block xl:py-24 xl:px-24">
-          <h2 className='mb-2 text-3xl font-semibold md:text-4xl'>
+          <h2 className='mb-2 text-3xl font-bold md:text-4xl'>
             Looking for me?{' '}
             <span aria-hidden role='presentation'>
               👀
@@ -100,7 +100,7 @@ export default function ContactPage() {
           <p className='pb-2'>Here are a few places you can say &#8220;Hi!&#8221;</p>
           <Socials />
           <div className='w-full border-t-2 border-solid h-1' />
-          <h3 className='mt-8 mb-2 text-xl font-semibold md:text-2xl'>
+          <h3 className='mt-8 mb-2 text-xl font-bold md:text-2xl'>
             Not the DM'ing type?
           </h3>
           <p className='mb-4'>Shoot me an email instead!</p>

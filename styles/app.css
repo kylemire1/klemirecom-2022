@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Poppins";
+  src: url(/fonts/Poppins/Poppins-Regular.ttf);
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url(/fonts/Poppins/Poppins-SemiBold.ttf);
+  font-weight: bold;
+}
+
 @layer base {
   textarea{
     @apply w-full mb-0 rounded-md
@@ -13,10 +24,10 @@
     @apply block mt-4
   }
   .button-primary {
-    @apply  font-semibold text-white border border-solid border-primary bg-primary rounded-md p-3 inline-flex items-center justify-between gap-2 transition-colors hover:bg-primary-dark focus:bg-primary-dark
+    @apply  font-bold text-white border border-solid border-primary bg-primary rounded-md p-3 inline-flex items-center justify-between gap-2 transition-colors hover:bg-primary-dark focus:bg-primary-dark
   }
   .button-secondary {
-    @apply text-primary  font-semibold bg-brand-light border-solid border border-brand-dark rounded-md p-3 inline-flex items-center justify-between gap-2  focus:border-primary hover:border-primary transition-colors
+    @apply text-primary  font-bold bg-brand-light border-solid border border-brand-dark rounded-md p-3 inline-flex items-center justify-between gap-2  focus:border-primary hover:border-primary transition-colors
   }
   .form-validation-error {
     @apply text-red-700

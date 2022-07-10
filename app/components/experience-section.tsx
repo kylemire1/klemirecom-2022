@@ -6,7 +6,7 @@ const ExperienceSection = () => {
     <div
       className={`lg:py-18 relative rounded-md bg-brand-light px-8 py-16 before:absolute before:-top-80 before:-left-72 before:-z-10 before:h-[575px] before:w-[634px] before:bg-[url('/images/circles-vector.svg')] after:absolute after:-right-32 after:-bottom-[512px] after:-z-10  after:h-[672px] after:w-[575px] after:bg-[url('/images/circles-solid.svg')] after:bg-no-repeat md:px-14 lg:after:block xl:py-24 xl:px-28`}
     >
-      <h3 id='experience' className='mb-12 text-3xl font-semibold md:text-4xl lg:mb-24'>
+      <h3 id='experience' className='mb-12 text-3xl font-bold md:text-4xl lg:mb-24'>
         Some recent experience
       </h3>
       <ul>
@@ -16,8 +16,8 @@ const ExperienceSection = () => {
           employer='WideOrbit'
         >
           <li>
-            Developing enterprise software front ends for the media industry using
-            React.
+            Developing enterprise software front ends for the media and broadcast
+            industry using React.
           </li>
           <li>
             Mentoring fellow developers and giving guidance toward modern practices.
