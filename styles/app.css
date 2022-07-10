@@ -4,12 +4,12 @@
 
 @font-face {
   font-family: "Poppins";
-  src: url(/fonts/Poppins/Poppins-Regular.ttf);
+  src: url(/fonts/Poppins/Poppins-Regular.woff2);
   font-weight: normal;
 }
 @font-face {
   font-family: "Poppins";
-  src: url(/fonts/Poppins/Poppins-SemiBold.ttf);
+  src: url(/fonts/Poppins/Poppins-SemiBold.woff2);
   font-weight: bold;
 }
 

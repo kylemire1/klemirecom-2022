@@ -10,7 +10,6 @@ export const links: LinksFunction = () => {
       rel: 'preload',
       as: 'image',
       href: '/images/me.jpg',
-      crossOrigin: 'anonymous',
     },
   ]
 }

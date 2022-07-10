@@ -30,16 +30,16 @@ export const links: LinksFunction = () => {
   return [
     {
       rel: 'preload',
-      href: '/fonts/Poppins/Poppins-Regular.ttf',
+      href: '/fonts/Poppins/Poppins-Regular.woff2',
       as: 'font',
-      type: 'font/ttf',
+      type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
     {
       rel: 'preload',
-      href: '/fonts/Poppins/Poppins-SemiBold.ttf',
+      href: '/fonts/Poppins/Poppins-SemiBold.woff2',
       as: 'font',
-      type: 'font/ttf',
+      type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
     { rel: 'stylesheet', href: tailwindStylesheetUrl },
