@@ -1169,9 +1169,14 @@ nav a:hover,  nav a:focus {
     opacity: 0;
   }
 
-  50% {
+  25% {
     transform: translate(0px, 10px);
     opacity: 0;
+  }
+
+  50% {
+    transform: translate(0px, 0px);
+    opacity: 1;
   }
 
   100% {
@@ -1186,9 +1191,14 @@ nav a:hover,  nav a:focus {
     opacity: 0;
   }
 
-  50% {
+  25% {
     transform: translate(0px, 10px);
     opacity: 0;
+  }
+
+  50% {
+    transform: translate(0px, 0px);
+    opacity: 1;
   }
 
   100% {
@@ -1200,6 +1210,45 @@ nav a:hover,  nav a:focus {
 .animate-delayed-fade-in {
   -webkit-animation: delayedFadeIn;
           animation: delayedFadeIn;
+}
+
+@-webkit-keyframes longDelayedFadeIn {
+  0% {
+    transform: translate(0px, 10px);
+    opacity: 0;
+  }
+
+  75% {
+    transform: translate(0px, 10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+    opacity: 1;
+  }
+}
+
+@keyframes longDelayedFadeIn {
+  0% {
+    transform: translate(0px, 10px);
+    opacity: 0;
+  }
+
+  75% {
+    transform: translate(0px, 10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+    opacity: 1;
+  }
+}
+
+.animate-long-delayed-fade-in {
+  -webkit-animation: longDelayedFadeIn;
+          animation: longDelayedFadeIn;
 }
 
 .list-disc {
@@ -1281,11 +1330,6 @@ nav a:hover,  nav a:focus {
 .border-primary {
   --tw-border-opacity: 1;
   border-color: rgb(102 51 153 / var(--tw-border-opacity));
-}
-
-.border-brand-dark {
-  --tw-border-opacity: 1;
-  border-color: rgb(196 196 196 / var(--tw-border-opacity));
 }
 
 .border-brand-medium {
@@ -1443,14 +1487,6 @@ nav a:hover,  nav a:focus {
   transition-duration: 150ms;
 }
 
-.delay-500 {
-  transition-delay: 500ms;
-}
-
-.duration-1000 {
-  transition-duration: 1000ms;
-}
-
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -1488,14 +1524,9 @@ nav a:hover,  nav a:focus {
           animation-duration: 10000ms;
 }
 
-.duration-1000 {
-  -webkit-animation-duration: 1000ms;
-          animation-duration: 1000ms;
-}
-
-.delay-500 {
-  -webkit-animation-delay: 500ms;
-          animation-delay: 500ms;
+.duration-2000 {
+  -webkit-animation-duration: 2000ms;
+          animation-duration: 2000ms;
 }
 
 .ease-in-out {

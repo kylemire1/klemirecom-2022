@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       animationDuration: {
         slow: '10000ms',
-        1200: '1200ms',
+        2000: '2000ms',
       },
       animation: {
         'hero-circle-orange-lg': 'heroOrangeLarge',
@@ -17,6 +17,7 @@ module.exports = {
         'hero-circle-purple-lg': 'heroPurpleLarge',
         'hero-circle-purple-sm': 'heroPurpleSmall',
         'delayed-fade-in': 'delayedFadeIn',
+        'long-delayed-fade-in': 'longDelayedFadeIn',
       },
       keyframes: {
         delayedFadeIn: {
@@ -24,7 +25,25 @@ module.exports = {
             transform: 'translate(0px, 10px)',
             opacity: 0,
           },
+          '25%': {
+            transform: 'translate(0px, 10px)',
+            opacity: 0,
+          },
           '50%': {
+            transform: 'translate(0px, 0px)',
+            opacity: 1,
+          },
+          '100%': {
+            transform: 'translate(0px, 0px)',
+            opacity: 1,
+          },
+        },
+        longDelayedFadeIn: {
+          '0%': {
+            transform: 'translate(0px, 10px)',
+            opacity: 0,
+          },
+          '75%': {
             transform: 'translate(0px, 10px)',
             opacity: 0,
           },
