@@ -31,8 +31,21 @@ export const links: LinksFunction = () => {
     { rel: 'stylesheet', href: tailwindStylesheetUrl },
     {
       rel: 'preload',
+      href: '/fonts/Poppins/Poppins-Regular.ttf',
+      as: 'font',
+      type: 'font/ttf',
+    },
+    {
+      rel: 'preload',
+      href: '/fonts/Poppins/Poppins-SemiBold.ttf',
+      as: 'font',
+      type: 'font/ttf',
+    },
+    {
+      rel: 'preload',
       as: 'image',
       href: '/images/me.jpg',
+      crossOrigin: 'anonymous',
     },
   ]
 }
