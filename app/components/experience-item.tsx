@@ -15,7 +15,7 @@ const ExperienceItem = ({
 }: ExperienceItemProps) => {
   return (
     <li
-      className={`grid grid-cols-12 items-center border-t border-solid  border-brand-dark pb-8 pt-8 last:border-b`}
+      className={`grid grid-cols-12 items-center border-t border-solid  border-brand-medium pb-8 pt-8 last:border-b`}
     >
       <div className='col-span-full lg:col-span-6'>
         <h4 className='mb-4 lg:mb-0'>

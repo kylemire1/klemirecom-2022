@@ -1163,6 +1163,45 @@ nav a:hover,  nav a:focus {
           animation: heroOrangeSmall;
 }
 
+@-webkit-keyframes delayedFadeIn {
+  0% {
+    transform: translate(0px, 10px);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translate(0px, 10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+    opacity: 1;
+  }
+}
+
+@keyframes delayedFadeIn {
+  0% {
+    transform: translate(0px, 10px);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translate(0px, 10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+    opacity: 1;
+  }
+}
+
+.animate-delayed-fade-in {
+  -webkit-animation: delayedFadeIn;
+          animation: delayedFadeIn;
+}
+
 .list-disc {
   list-style-type: disc;
 }
@@ -1247,6 +1286,11 @@ nav a:hover,  nav a:focus {
 .border-brand-dark {
   --tw-border-opacity: 1;
   border-color: rgb(196 196 196 / var(--tw-border-opacity));
+}
+
+.border-brand-medium {
+  --tw-border-opacity: 1;
+  border-color: rgb(230 233 238 / var(--tw-border-opacity));
 }
 
 .bg-white {
@@ -1387,6 +1431,10 @@ nav a:hover,  nav a:focus {
   color: rgb(74 222 128 / var(--tw-text-opacity));
 }
 
+.opacity-0 {
+  opacity: 0;
+}
+
 .transition {
   transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -1395,16 +1443,16 @@ nav a:hover,  nav a:focus {
   transition-duration: 150ms;
 }
 
+.delay-500 {
+  transition-delay: 500ms;
+}
+
 .duration-1000 {
   transition-duration: 1000ms;
 }
 
-.duration-700 {
-  transition-duration: 700ms;
-}
-
-.ease-out {
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @-webkit-keyframes enter {
@@ -1435,34 +1483,6 @@ nav a:hover,  nav a:focus {
   }
 }
 
-.animate-in {
-  -webkit-animation-name: enter;
-          animation-name: enter;
-  -webkit-animation-duration: 150ms;
-          animation-duration: 150ms;
-  --tw-enter-opacity: initial;
-  --tw-enter-scale: initial;
-  --tw-enter-rotate: initial;
-  --tw-enter-translate-x: initial;
-  --tw-enter-translate-y: initial;
-}
-
-.fade-in-0 {
-  --tw-enter-opacity: 0;
-}
-
-.fade-in {
-  --tw-enter-opacity: 0;
-}
-
-.slide-in-from-bottom-2 {
-  --tw-enter-translate-y: 0.5rem;
-}
-
-.slide-in-from-bottom-4 {
-  --tw-enter-translate-y: 1rem;
-}
-
 .duration-slow {
   -webkit-animation-duration: 10000ms;
           animation-duration: 10000ms;
@@ -1473,14 +1493,19 @@ nav a:hover,  nav a:focus {
           animation-duration: 1000ms;
 }
 
-.duration-700 {
-  -webkit-animation-duration: 700ms;
-          animation-duration: 700ms;
+.delay-500 {
+  -webkit-animation-delay: 500ms;
+          animation-delay: 500ms;
 }
 
-.ease-out {
-  -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-          animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+.ease-in-out {
+  -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fill-mode-forwards {
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 .direction-alternate {

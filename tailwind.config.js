@@ -9,14 +9,30 @@ module.exports = {
     extend: {
       animationDuration: {
         slow: '10000ms',
+        1200: '1200ms',
       },
       animation: {
         'hero-circle-orange-lg': 'heroOrangeLarge',
         'hero-circle-orange-sm': 'heroOrangeSmall',
         'hero-circle-purple-lg': 'heroPurpleLarge',
         'hero-circle-purple-sm': 'heroPurpleSmall',
+        'delayed-fade-in': 'delayedFadeIn',
       },
       keyframes: {
+        delayedFadeIn: {
+          '0%': {
+            transform: 'translate(0px, 10px)',
+            opacity: 0,
+          },
+          '50%': {
+            transform: 'translate(0px, 10px)',
+            opacity: 0,
+          },
+          '100%': {
+            transform: 'translate(0px, 0px)',
+            opacity: 1,
+          },
+        },
         heroPurpleSmall: {
           '0%': {
             transform: 'translate(0px, 0px)',
@@ -84,7 +100,7 @@ module.exports = {
         highlight: '#FF5D3A',
         'highlight-dark': '#d84a2b',
         'brand-light': '#F7F7F7',
-        'brand-medium': '#e5e5e5',
+        'brand-medium': '#e6e9ee',
         'brand-dark': '#C4C4C4',
         black: '#2d2c2c',
       },
