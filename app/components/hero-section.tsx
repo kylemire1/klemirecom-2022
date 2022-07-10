@@ -18,12 +18,12 @@ const HeroSection = () => {
           I'm based in Chicago and am currently busy raising a Border Collie with my
           partner and working as a Senior Software Engineer at WideOrbit.
         </p>
-        <div className='flex gap-4'>
-          <Link to='#about' className='button-highlight'>
+        <div className='flex items-center gap-4'>
+          <Link to='#about' className='button-primary'>
             <ArrowDownIcon width='1.5rem' />
             Learn more about me
           </Link>
-          <Link to='/contact' className='button-primary'>
+          <Link to='/contact' className='button-secondary'>
             Get in touch
           </Link>
         </div>

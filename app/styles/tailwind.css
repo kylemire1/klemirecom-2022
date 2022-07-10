@@ -644,7 +644,7 @@ label,   button[type="submit"] {
   background-color: rgb(84 40 128 / var(--tw-bg-opacity));
 }
 
-.button-highlight {
+.button-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -653,15 +653,15 @@ label,   button[type="submit"] {
   border-width: 1px;
   border-style: solid;
   --tw-border-opacity: 1;
-  border-color: rgb(255 93 58 / var(--tw-border-opacity));
+  border-color: rgb(196 196 196 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(255 93 58 / var(--tw-bg-opacity));
+  background-color: rgb(247 247 247 / var(--tw-bg-opacity));
   padding: 0.75rem;
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 600;
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(102 51 153 / var(--tw-text-opacity));
   transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
@@ -669,19 +669,29 @@ label,   button[type="submit"] {
   transition-duration: 150ms;
 }
 
-.button-highlight:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(216 74 43 / var(--tw-bg-opacity));
+.button-secondary:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(102 51 153 / var(--tw-border-opacity));
 }
 
-.button-highlight:focus {
-  --tw-bg-opacity: 1;
-  background-color: rgb(216 74 43 / var(--tw-bg-opacity));
+.button-secondary:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(102 51 153 / var(--tw-border-opacity));
 }
 
 .form-validation-error {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
+}
+
+nav a:hover,  nav a:focus {
+  --tw-text-opacity: 1;
+  color: rgb(102 51 153 / var(--tw-text-opacity));
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 *, ::before, ::after {
@@ -1361,6 +1371,11 @@ label,   button[type="submit"] {
   line-height: 1.625;
 }
 
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(45 44 44 / var(--tw-text-opacity));
+}
+
 .text-highlight {
   --tw-text-opacity: 1;
   color: rgb(255 93 58 / var(--tw-text-opacity));
@@ -1374,11 +1389,6 @@ label,   button[type="submit"] {
 .text-green-400 {
   --tw-text-opacity: 1;
   color: rgb(74 222 128 / var(--tw-text-opacity));
-}
-
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .transition {

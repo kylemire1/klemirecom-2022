@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react'
+import { Link, NavLink } from '@remix-run/react'
 import React from 'react'
 import Footer from './footer'
 
@@ -13,13 +13,13 @@ const Layout = ({ children }: { children?: React.ReactNode }) => {
         </div>
         <ul className='flex items-center justify-center gap-7'>
           <li>
-            <Link to='/#experience'>Experience</Link>
+            <NavLink to='/#experience'>Experience</NavLink>
           </li>
           <li>
-            <Link to='/#about'>About</Link>
+            <NavLink to='/#about'>About</NavLink>
           </li>
           <li>
-            <Link to='/contact'>Contact</Link>
+            <NavLink to='/contact'>Contact</NavLink>
           </li>
         </ul>
       </nav>

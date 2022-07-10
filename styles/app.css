@@ -15,11 +15,14 @@
   .button-primary {
     @apply text-base font-semibold text-white border border-solid border-primary bg-primary rounded-md p-3 inline-flex items-center justify-between gap-2 transition-colors hover:bg-primary-dark focus:bg-primary-dark
   }
-  .button-highlight {
-    @apply text-white text-base font-semibold bg-highlight border border-solid border-highlight rounded-md p-3 inline-flex items-center justify-between gap-2 hover:bg-highlight-dark focus:bg-highlight-dark transition-colors
+  .button-secondary {
+    @apply text-primary text-base font-semibold bg-brand-light border-solid border border-brand-dark rounded-md p-3 inline-flex items-center justify-between gap-2  focus:border-primary hover:border-primary transition-colors
   }
   .form-validation-error {
     @apply text-red-700
+  }
+  nav a:hover, nav a:focus {
+    @apply text-primary transition-colors
   }
 }
 

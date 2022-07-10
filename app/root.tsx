@@ -66,7 +66,7 @@ export default function App() {
     >
       <html
         lang='en'
-        className={`h-full overflow-x-hidden text-[80%] md:text-[97%] lg:text-[100%]`}
+        className={`text-black h-full overflow-x-hidden text-[80%] md:text-[97%] lg:text-[100%]`}
       >
         <head>
           <Meta />

@@ -86,6 +86,7 @@ module.exports = {
         'brand-light': '#F7F7F7',
         'brand-medium': '#e5e5e5',
         'brand-dark': '#C4C4C4',
+        black: '#2d2c2c',
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
