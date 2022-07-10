@@ -34,17 +34,13 @@ export const links: LinksFunction = () => {
       href: '/fonts/Poppins/Poppins-Regular.ttf',
       as: 'font',
       type: 'font/ttf',
+      crossOrigin: 'anonymous',
     },
     {
       rel: 'preload',
       href: '/fonts/Poppins/Poppins-SemiBold.ttf',
       as: 'font',
       type: 'font/ttf',
-    },
-    {
-      rel: 'preload',
-      as: 'image',
-      href: '/images/me.jpg',
       crossOrigin: 'anonymous',
     },
   ]
