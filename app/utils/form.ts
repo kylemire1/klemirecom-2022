@@ -1,6 +1,3 @@
-import { json } from '@remix-run/node'
-import type { ActionData } from '~/routes/contact'
-
 export const encode = (data: Record<any, any>) => {
   if (!data) return ''
   return Object.keys(data)
@@ -22,5 +19,3 @@ export const validateEmail = (email: string) => {
     return `Email is invalid`
   }
 }
-
-export const badRequest = (data: ActionData) => json(data, { status: 400 })

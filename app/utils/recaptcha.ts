@@ -28,3 +28,24 @@ export const useRecaptcha: UseRecaptchaHook = ({ action }) => {
     handleReCaptchaVerify,
   }
 }
+
+type VerifyTokenReturnValue = Promise<{
+  success: boolean
+  challenge_ts?: string
+  hostname?: string
+  score?: number
+  action?: string
+  'error-codes'?: Array<string>
+}>
+
+export const verifyToken = async (token: string): VerifyTokenReturnValue => {
+  return await fetch(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+    {
+      method: 'post',
+    }
+  ).then((r) => r.json())
+}
+
+export const passesSuccess = (result: Awaited<VerifyTokenReturnValue>) =>
+  !result.success || (result?.score ?? 0) < 0.5

@@ -1,14 +1,12 @@
 import type { ActionFunction, MetaFunction } from '@remix-run/node'
-import { fetch } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Form, useActionData, useTransition } from '@remix-run/react'
 import { Layout } from '~/components'
 import SuccessAlert from '~/components/success-alert'
-import LinkedIn from '~/components/svg/linkedin'
-import Twitter from '~/components/svg/twitter'
-import { validateTextInput, validateEmail, badRequest } from '~/utils/form'
+import { validateTextInput, validateEmail } from '~/utils/form'
 import { sendMail } from '~/utils/mail.server'
-import { useRecaptcha } from '~/utils/hooks/useRecaptcha'
+import { passesSuccess, useRecaptcha, verifyToken } from '~/utils/recaptcha'
+import Socials from '~/components/socials'
 
 export type ActionData = {
   formError?: string
@@ -50,20 +48,16 @@ export const action: ActionFunction = async ({ request }) => {
     message: validateTextInput(message, 'Message'),
     token: validateTextInput(token, 'Recaptcha Verification'),
   }
+
   const fields = { name, email, message, token }
   if (Object.values(fieldErrors).some(Boolean)) {
-    return badRequest({ fieldErrors, fields })
+    return json({ fieldErrors, fields }, { status: 400 })
   }
 
   try {
-    const result = await fetch(
-      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
-      {
-        method: 'post',
-      }
-    ).then((r) => r.json())
+    const result = await verifyToken(token)
 
-    if (!result.success || result.score < 0.5) {
+    if (!passesSuccess(result)) {
       json({ formError: `reCAPTCHA verification failed` }, { status: 422 })
     }
   } catch (error) {
@@ -107,30 +101,7 @@ export default function ContactPage() {
             </span>
           </h2>
           <p className='pb-2'>Here are a few places you can say &#8220;Hi!&#8221;</p>
-          <div className='mb-8'>
-            <ul className='flex items-center gap-4'>
-              <li>
-                <a
-                  className='flex gap-2 items-center'
-                  href='https://twitter.com/KyleLemire1'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <Twitter width={24} /> Twitter
-                </a>
-              </li>
-              <li>
-                <a
-                  className='flex gap-2'
-                  href='https://www.linkedin.com/in/kyle-lemire-9967a1149/'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <LinkedIn width={24} /> LinkedIn
-                </a>
-              </li>
-            </ul>
-          </div>
+          <Socials />
           <div className='w-full border-t-2 border-solid h-1' />
           <h3 className='mt-8 mb-2 text-xl font-semibold md:text-2xl'>
             Not the DM'ing type?
