@@ -42,6 +42,11 @@ export const links: LinksFunction = () => {
       type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
+    {
+      rel: 'preload',
+      href: tailwindStylesheetUrl,
+      as: 'style',
+    },
     { rel: 'stylesheet', href: tailwindStylesheetUrl },
   ]
 }
