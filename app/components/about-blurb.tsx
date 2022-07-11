@@ -18,7 +18,7 @@ const AboutBlurb = () => {
           </div>
         </h5>
         <p className='mb-8 leading-relaxed'>
-          I have been a front end engineer for over 4 years, and in that time I have
+          I have been a front end engineer for over 5 years, and in that time I have
           found a passion for the human side of software. I feel most at-home when I am
           teaching another developer a subject I am excited about or testing UI
           components to make sure they are accessible to users of any ability.
