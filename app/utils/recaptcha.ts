@@ -49,3 +49,8 @@ export const verifyToken = async (token: string): VerifyTokenReturnValue => {
 
 export const passesSuccess = (result: Awaited<VerifyTokenReturnValue>) =>
   !result.success || (result?.score ?? 0) < 0.5
+
+export const RECAPTCHA_SCRIPT_HREF =
+  'https://www.gstatic.com/recaptcha/releases/4rwLQsl5N_ccppoTAwwwMrEN/recaptcha__en.js'
+export const RECAPTCHA_INTEGRITY =
+  'sha384-o1nfdUm9cV7Sx6HxXDsnady1EGmCBTwza/JTA6OSowyOK+wq0YF0+F9jejHVacaR'

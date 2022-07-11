@@ -14,6 +14,7 @@ import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 import type { EnvType } from 'window'
 import tailwindStylesheetUrl from './styles/tailwind.css'
 import { generateMetaFunction } from './utils/helpers'
+import { RECAPTCHA_INTEGRITY, RECAPTCHA_SCRIPT_HREF } from './utils/recaptcha'
 
 type LoaderData = {
   ENV: EnvType
@@ -46,6 +47,14 @@ export const links: LinksFunction = () => {
       rel: 'preload',
       href: tailwindStylesheetUrl,
       as: 'style',
+    },
+    {
+      rel: 'preload',
+      href: RECAPTCHA_SCRIPT_HREF,
+      as: 'script',
+      type: 'text/javascript',
+      crossOrigin: 'anonymous',
+      integrity: RECAPTCHA_INTEGRITY,
     },
     { rel: 'stylesheet', href: tailwindStylesheetUrl },
   ]
