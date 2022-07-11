@@ -6,11 +6,13 @@
   font-family: "Poppins";
   src: url(/fonts/Poppins/Poppins-Regular.woff2);
   font-weight: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Poppins";
   src: url(/fonts/Poppins/Poppins-SemiBold.woff2);
   font-weight: bold;
+  font-display: swap;
 }
 
 @layer base {
