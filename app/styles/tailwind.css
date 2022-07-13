@@ -1565,6 +1565,8 @@ nav a:hover,  nav a:focus {
   src: url(/fonts/Poppins/Poppins-Regular.woff2);
 
   font-weight: normal;
+
+  font-display: swap;
 }
 
 @font-face {
@@ -1573,6 +1575,8 @@ nav a:hover,  nav a:focus {
   src: url(/fonts/Poppins/Poppins-SemiBold.woff2);
 
   font-weight: bold;
+
+  font-display: swap;
 }
 
 .recaptcha-wrapper {
