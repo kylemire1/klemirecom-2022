@@ -28,6 +28,8 @@ export async function loader() {
 
 export const links: LinksFunction = () => {
   return [
+    { rel: 'preconnect', href: 'https://www.gstatic.com' },
+    { rel: 'preconnect', href: 'https://www.google.com' },
     {
       rel: 'preload',
       href: '/fonts/Poppins/Poppins-Regular.woff2',
@@ -64,8 +66,7 @@ export default function App() {
       scriptProps={{
         async: true, // optional, default to false,
         defer: true, // optional, default to false
-        appendTo: 'head', // optional, default to "head", can be "head" or "body",
-        nonce: undefined, // optional, default undefined
+        appendTo: 'body', // optional, default to "head", can be "head" or "body",
       }}
     >
       <html
